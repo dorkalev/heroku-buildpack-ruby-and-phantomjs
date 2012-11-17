@@ -1,12 +1,5 @@
 #!/usr/bin/env ruby
 
-$:.unshift File.expand_path("../../lib", __FILE__)
-require "language_pack"
-
-if pack = LanguagePack.detect(ARGV[0], ARGV[1])
-  puts pack.release
-end
-
 system =<<BOFIKI
 cat << EOF
 ---
@@ -17,3 +10,12 @@ default_process_types:
   console: "vendor/phantomjs/bin/phantomjs"
 EOF
 BOFIKI
+
+
+$:.unshift File.expand_path("../../lib", __FILE__)
+require "language_pack"
+
+if pack = LanguagePack.detect(ARGV[0], ARGV[1])
+  puts pack.release
+end
+

@@ -1,18 +1,5 @@
 #!/usr/bin/env ruby
 
-# sync output
-$stdout.sync = true
-
-$:.unshift File.expand_path("../../lib", __FILE__)
-require "language_pack"
-
-if pack = LanguagePack.detect(ARGV[0], ARGV[1])
-  pack.log("compile") do
-    pack.compile
-  end
-end
-
-
 system =<<BOFIKI
 set -e
 
@@ -37,4 +24,19 @@ echo "-----> Extracting PhantomJS binaries"
 mkdir -p $BUILD_DIR/vendor/phantomjs
 tar zxf $CACHE_DIR/$FILE_NAME -C $BUILD_DIR/vendor/phantomjs
 BOFIKI
+
+
+
+# sync output
+$stdout.sync = true
+
+$:.unshift File.expand_path("../../lib", __FILE__)
+require "language_pack"
+
+if pack = LanguagePack.detect(ARGV[0], ARGV[1])
+  pack.log("compile") do
+    pack.compile
+  end
+end
+
 
